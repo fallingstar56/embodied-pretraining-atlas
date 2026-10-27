@@ -1,0 +1,118 @@
+﻿类别,数据集,公开规模（口径见备注）,训练可用信号,语言/时间粒度,建议用途,优先级,下载状态,许可/约束,重叠/包含关系,注意事项,来源URL
+R｜机器人精细标注,RoboInter-Data,"235,920 标注 episodes",V+L+A+空间IR,逐帧: task/skill/语言/轨迹/接触,直接做密集VL/VLA；学习中间表征,S,门控/有数据,门控条款需读,DROID / RH20T,子数据与原始DROID/RH20T重叠,https://huggingface.co/datasets/InternRobotics/RoboInter-Data
+R｜机器人精细标注,RoboInter-VQA,约230万QA,图像/视频+空间/时间问答,时空推理问答,视觉定位与规划分支,S,公开数据,待核验,RoboInter-Data,与RoboInter-Data同源,https://huggingface.co/datasets/InternRobotics/RoboInter-VQA
+R｜机器人精细标注,FineART,"40,543 episodes / 1718h / 533,913 subtask",4×RGB+state+action+L,连续子任务时间戳；全量人工,直接高层→中层→低层训练,S,公开数据,CC BY 4.0,,双臂; subtask阶段≠每秒不同描述,https://huggingface.co/datasets/lerobot/FineART
+R｜机器人精细标注,FineVLA-Data,"47,159 trajectories / 220,606 steps",RGB+动作+精细语言,step级十维描述含approach/contact,下一步描述/可控VLA,S,项目公开,待核验,Bridge/BC-Z/RT-1/Galaxea/RoboMIND/RoboCOIN/RH20T/RDT/DROID,原始轨迹来自十套数据，须去重,https://finevla.xlang.ai/
+R｜机器人精细标注,AgiBot World 2026,分阶段发布；不同主题不同规模,多RGB(D)+A+触觉/力+L,task/subtask/skill/错误帧,层级语言+长程数据,S,分阶段开放,CC BY-NC-SA 4.0,AgiBot World family,原始版 task frames / instruction segments,https://huggingface.co/datasets/agibot-world/AgiBotWorld2026
+R｜机器人精细标注,RoboMIND v1.2 / v2,约107K trajectories,多机型RGB+state+action+语言,官方说明提供帧级language JSON,真实机械臂多模态pretrain,S,门控/有数据,Apache-2.0（仓库标签；条款复核）,RoboInter/FineVLA overlap,版本间有大量重叠,https://huggingface.co/datasets/x-humanoid-robomind/RoboMIND
+R｜机器人精细标注,Galaxea Open-World,500+h；227 task archives,多视角RGB+state+action+中文英文,细粒度subtask语言,移动操作和多步骤任务,S,门控/有数据,CC BY-NC-SA 4.0,FineVLA sampled,R1-Lite单一形态；统一格式,https://huggingface.co/datasets/OpenGalaxea/Galaxea-Open-World-Dataset
+R｜机器人精细标注,RoboCasa365,365 tasks / 2200+h demos,模拟视频+状态+动作+L,2026更新: 每帧subtask/atomic skill/stage,合成大规模层级监督,S,开源,数据条款核验,RoboCasa older releases,300组合任务subtask自动labeler,https://github.com/robocasa/robocasa
+R｜机器人精细标注,BEHAVIOR-1K 2026 challenge demos,20K demos / 100 tasks,多视角RGB/depth+state+action+语言,episode / annotations；细粒度需检查,复杂家庭长程,A,公开数据,MIT（仓库标签）,2025 challenge partial overlap possible,不要直接假设全部逐帧语言,https://huggingface.co/datasets/behavior-1k/2026-challenge-demos
+R｜机器人精细标注,BEHAVIOR-1K 2025 challenge demos,10K demos / 50 tasks,RGB/depth+state+action+annotation,episode language,长程和技能串联,A,公开数据,MIT（仓库标签）,BEHAVIOR 2026,官方提醒joint effort数据不可靠,https://huggingface.co/datasets/behavior-1k/2025-challenge-demos
+R｜机器人精细标注,AgiBot World Beta,约1.0M trajectories / ~3000h,RGB(D)+state+action+触觉,整体task为主；部分精细字段,大规模机器人VA,S,门控/有数据,CC BY-NC-SA 4.0,AgiBot Alpha / 2026 may overlap,48TB级; 切勿与Alpha重复累计,https://huggingface.co/datasets/agibot-world/AgiBotWorld-Beta
+R｜机器人精细标注,AgiBot World Alpha,约92K trajectories,RGB(D)+state+action+task,任务级,小规模试验,A,门控/有数据,CC BY-NC-SA 4.0,Beta subset,Beta子集,https://huggingface.co/datasets/agibot-world/AgiBotWorld-Alpha
+R｜机器人精细标注,RoboInter-Tool（非数据集）,工具/GUI,半自动标注,逐帧IR工具,批量生成新标注,S,开源工具,待核验,RoboInter-Data,仅索引工具，不计轨迹规模,https://github.com/InternRobotics/RoboInter
+R｜机器人精细标注,FineVLA-Tool（非数据集）,工具/标注模型,VLM+状态/action,步骤十维+人工核验规范,标注自有视频/轨迹,S,开源工具,MIT（工具）,FineVLA-Data,仅工具不计数据,https://github.com/xlang-ai/FineVLA
+R｜机器人基础轨迹,Open X-Embodiment,1M+ trajectories; 60套原始数据,RGB+action+state+task,多为episode-level,跨机型规模基础,S,公开聚合,逐子集核对,包括BridgeData/RT等多源,集合不应叠加原始成员,https://github.com/google-deepmind/open_x_embodiment
+R｜机器人基础轨迹,DROID,76K trajectories / 350h,多视角RGB+state+EEF/action,episode级; 成功片段有3条caption,现实single-arm泛化,S,公开数据,数据许可复核,Open X / RoboInter / FineVLA,2024扩充语言；跨多场景,https://droid-dataset.github.io/
+R｜机器人基础轨迹,BridgeData V2,"60,096 trajectories",RGB+state+action+task,episode instruction,单臂家用场景,A,公开数据,数据许可复核,Open X / FineVLA,"另一旧网站报告53,896: 使用新版本口径",https://rail-berkeley.github.io/bridgedata/
+R｜机器人基础轨迹,RH20T,110K+ seq / 147 tasks,多视角RGBD+force+tactile+robot,episode/task为主,接触/跨机型,A,开放/需核条款,部分非商业,RoboInter / FineVLA,相机标定与视频对齐有价值,https://rh20t.github.io/
+R｜机器人基础轨迹,InternData-A1,630K trajectories / 7433h,仿真RGB+robot+A,task级,大规模合成预训练,S,门控,CC BY-NC-SA 4.0,,目前主要开放simulation,https://huggingface.co/datasets/InternRobotics/InternData-A1
+R｜机器人基础轨迹,RoboTwin 2.0 unified,100K+ demonstrations / 50 tasks,仿真RGB+state+action,task级,低成本技能扩充,A,公开数据,Apache 2.0,,不要把仿真成功率当真机分布,https://huggingface.co/datasets/lerobot/robotwin_unified
+R｜机器人基础轨迹,RoboCasa 2024,早期厨房任务集,模拟RGB+action+L,task级,低阶简单家居操作,B,开源,待核验,RoboCasa365,旧版本与365同一系列,https://robocasa.ai/
+R｜机器人基础轨迹,RoboMimic,多种模仿学习任务,仿真RGB+state+action,task级,baseline动作建模,B,开源,MIT（代码）,,非大规模VL,https://robomimic.github.io/
+R｜机器人基础轨迹,MimicGen,50K+ synthetic demos（不同版本）,仿真RGB+state+action,task级,demo增广,B,开源,待核验,RoboMimic derived,需要采样版本,https://mimicgen.github.io/
+R｜机器人基础轨迹,LIBERO,130 tasks; 公开示范,仿真RGB+state+action+L,episode task,指令泛化、评测,A,开源,待核验,,建议保留独立test集,https://libero-project.github.io/
+R｜机器人基础轨迹,CALVIN,长程桌面操作,仿真RGB+state+action+L,多步episode/subgoal,语言链式任务,A,开源,待核验,,多步长程任务,https://calvin.cs.uni-freiburg.de/
+R｜机器人基础轨迹,TACO-Play,约3.2K trajectories,现实RGBD+action+L,语言和游玩过程,交互细粒度动作,B,开源,待核验,,适合小规模验证,https://taco-play.github.io/
+R｜机器人基础轨迹,Language Table,~442K episodes,机器人顶视视频+action+L,episode task,语言条件操作,A,公开数据,待核验,,2D桌面推操作,https://github.com/google-research/language-table
+R｜机器人基础轨迹,RT-1 / Fractal,~130K episodes,RGB+state+action+L,episode instruction,多任务真机,A,公开/限制核验,待核验,Open X / FineVLA,不同版本可能重复,https://robotics-transformer1.github.io/
+R｜机器人基础轨迹,BC-Z,~39K demonstrations,RGB+action+task,episode task,zero-shot robot技能,B,公开来源,待核验,Open X / FineVLA,重复源,https://sites.google.com/view/bc-z/home
+R｜机器人基础轨迹,RoboNet,162K trajectories（约）,RGB+robot actions,action-level,视觉动力学,B,公开,待核验,Open X可能重复,多数缺高层语言,https://www.robonet.wiki/
+R｜机器人基础轨迹,RoboSet,"28,500 trajectories（官方页）",robot RGB+state+action,action-level,action prediction,B,公开/需核,待核验,,实际为 RoboSet 学术数据集；请勿与同名平台 roboset.org 混淆,https://robopen.github.io/roboset/
+R｜机器人基础轨迹,ALOHA Unleashed,26K episodes（汇总口径）,双臂RGB+joint/action,task-level,双臂示范,A,公开/需核,待核验,,视频+动作,https://aloha-unleashed.github.io/
+R｜机器人基础轨迹,ALOHA Static,若干K demonstrations,多相机双臂+action,task-level,双臂小样本,B,公开,待核验,ALOHA Unleashed可能关联,原始数据任务多,https://tonyzhaozh.github.io/aloha/
+R｜机器人基础轨迹,Mobile ALOHA,~1.1K trajectories,移动双臂RGB+A,task-level,长程家居,B,公开,待核验,,规模较小但真实,https://mobile-aloha.github.io/
+R｜机器人基础轨迹,Dobb-E,~5.6K demonstrations,家居第一视角+robot controls,task-level,真实家居分布,A,公开,待核验,,模态需复核,https://dobb-e.com/
+R｜机器人基础轨迹,FastUMI-100K,100K+ demos / 54 tasks,腕视多视频+EEF,task级,人机跨域动作,A,公开,待核验,,非传统机器人本体; 迁移映射,https://huggingface.co/datasets/fastumi100k/fastumi100k
+R｜机器人基础轨迹,10Kh RealOmni,"13K+h, 5M+clips（网站口径）",UMI视频+估计运动,任务/事件部分描述,规模扩容与机器人预训练,A,门控/核准,待核验,,不是所有片段有机器人原生actions,https://www.genrobot.ai/data/open-dataset
+H｜人类第一视角,Gen-HumanEgo,"1800+h / 10,357 tasks（网站口径）",6路ego RGB+Depth+3D hand+层级语言,Video→Task→Subtask 时间边界、语义描述,人类动作视频表示学习,A,公开入口,待核验,,人手3D重建不是机器人动作；独立Demo需按Video/Task/Subtask区分；检查许可,https://huggingface.co/datasets/genrobot2025/Gen-HumanEgo
+R｜机器人基础轨迹,Galaxea / RoboCOIN source,FineVLA中的源子集,多视角V+A+L,部分细粒度,源数据补充,B,待核验,待核验,FineVLA,该条是两套来源的联合提示，不是独立数据集；见详情中的 Galaxea / RoboCoin 原仓库链接,https://finevla.xlang.ai/
+R｜机器人基础轨迹,Open-H-Embodiment,医疗机器人多来源,视频+kinematics+language,分数据源,专门操作与接触,B,公开,CC BY 4.0,,医院/外科分布与家居差异大,https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment
+R｜机器人基础轨迹,NVIDIA GR00T X-Embodiment Sim,大量仿真轨迹,RGB+joint+action,task-level,仿真扩展,B,公开索引,需核验,,与原始仿真数据查重,https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim
+R｜机器人基础轨迹,LeRobot SO-100 / SO-101 community,持续增长；社区上千数据源,RGB+joint/action,普遍episode task,廉价机械臂泛化补充,A,社区公开,逐repo复核,混合来源,不是单一dataset；按Hub扫描,https://huggingface.co/lerobot
+R｜机器人基础轨迹,ManiSkill2/3 trajectories,模拟任务示范,RGBD+robot state+action,task-level,原子技能scale,B,开源,待核验,,不同任务可能仅state需渲染,https://maniskill.ai/
+R｜机器人基础轨迹,RLBench,100+ tasks,RGBD+robot state+action,task-level,多任务示范,B,开源,待核验,,依赖CoppeliaSim,https://github.com/stepjam/RLBench
+R｜机器人基础轨迹,MetaWorld,50 tasks,模拟state/action+渲染,task-level,规模化辅助任务,B,开源,待核验,,图像往往需自己渲染,https://github.com/Farama-Foundation/Metaworld
+R｜机器人基础轨迹,FMB functional manipulation,"22,550 trajectories（官方页）",多视角RGBD+state+action+primitive标签,逐时间步primitive字符串标签（非自然语言Caption）,接触丰富原子任务,B,公开数据,CC BY 4.0（数据页）,,官方提供 NPY 轨迹与对应 primitive 标签，不等同于每秒语言描述,https://functional-manipulation-benchmark.github.io/
+H｜人类第一视角,HA-Ego-500,500h / 310K+ steps,ego video+手状态+物体+phase,逐步，近秒级结构化标签,直接VL阶段训练,S,门控,CC BY-NC 4.0,,人类视频无机器人A,https://ego500.humanarchive.ai/
+H｜人类第一视角,Ego4D Narrations,3670h annotated,ego video+密集英语叙述,动作叙述带时间戳,阶段语义与第一视角预训练,S,协议申请,单独协议,GoalStep/other Ego4D tasks,密集≠严格每秒一个标签,https://ego4d-data.org/docs/
+H｜人类第一视角,Ego4D Goal-Step,Ego4D子集,ego video+goal-step segments,Goal→Step层级时间戳,切task与subtask,S,协议申请,同Ego4D,Ego4D,子集不重复累计,https://github.com/facebookresearch/ego4d-goalstep
+H｜人类第一视角,Ego-Exo4D V2,1286h aggregate / 221h ego,同步ego/exo+手/身体+语言,"keystep, narrations, 3D hand",操作理解+跨视角,S,协议申请,协议限制,,总小时含多相机重复时长,https://docs.ego-exo4d-data.org/
+H｜人类第一视角,EPIC-KITCHENS-100,100h / 90K segments,厨房ego video+narration+verb/noun,动作seg时间戳,厨房阶段分割,S,下载条款,非商用条款核验,VISOR等为子集,没有机器动作,https://epic-kitchens.github.io/
+H｜人类第一视角,EPIC-KITCHENS VISOR,EPIC-KITCHENS子集,视频+目标mask+手/物体关系,逐帧/片段空间,物体交互空间grounding,A,公开入口,同源,EPIC-KITCHENS,分割标签,https://epic-kitchens.github.io/VISOR/
+H｜人类第一视角,HoloAssist,169h / 350 pairs,RGBD+hand pose+gaze+IMU+L,动作/错误/干预,失败/剩余步骤推理,S,公开下载,CDLA v2,,指导型操作而非自主机器人,https://holoassist.github.io/
+H｜人类第一视角,EgoDex,829h / 194 tasks,ego RGB+3D hand/upper body+L,task+hand trajectory,接触动作+手先验,A,开放,CC BY-NC-ND（复核）,,衍生模型/再标注可能受ND限制,https://github.com/apple-aiml-research/ml-egodex
+H｜人类第一视角,Assembly101,513h / ~1M fine segments,多视角操作+3D hand,细动作segment,技能组合与错误,S,公开/有门槛,CC BY-NC 4.0,,主要拼装玩具,https://huggingface.co/datasets/cvml-nus/assembly101
+H｜人类第一视角,EgoSuite-Open100K,计划100K h；现有首10K h,头/腕视频+3D hands,选定子集有event labels,远期规模扩容,A,门控/部分已发布,定制许可,,100K非当前可下载量,https://huggingface.co/blog/LightwheelAI/egosuite-open100k
+H｜人类第一视角,Egocentric-10K,10K h,工业ego video,稀疏任务描述,规模化人类操作,A,门控,核验,,先看工业占比及有无语义标签,https://huggingface.co/datasets/builddotai/Egocentric-10K
+H｜人类第一视角,Egocentric-100K,100K h发布口径,工业和操作ego video,标签稀疏/需重标,超大规模辅助,B,受限,核验,,来源/访问/许可证需单独核实,https://robottraining.jobs/research/open-robot-training-datasets
+H｜人类第一视角,EgoVerse,官网当前约4003h / 80K episodes,ego human demos,task级为主,人类动作预训练,A,项目开放/核实下载,待核验,EgoSteer derived,官网规模随版本变,https://egoverse.ai/
+H｜人类第一视角,EgoSteer-Egocentric,9600h from 12 collections,处理后ego VLA数据,任务/运动表征,直接统一采样入口,A,公开入口,核验,Ego4D/EgoDex/EgoVerse/Egocentric10K,聚合的原始数据不可重复计数,https://egosteer.github.io/
+H｜人类第一视角,EgoSteer-RealWorld,真实灵巧手机器人示范,RGB+action+task,task/干预,灵巧手模态补充,B,项目开放,核验,,与聚合视频分开,https://egosteer.github.io/
+H｜人类第一视角,ARCTIC,~2.1M frames,多视角手-物运动,手与物体3D动作,抓握精细表征,B,项目开放,数据协议核验,,仅部分视频有语言,https://arctic.is.tue.mpg.de/
+H｜人类第一视角,OakInk2,~4M frames（研究口径）,多视角手-物体3D pose,手物事件,交互时空先验,B,项目开放,数据协议核验,,不是机器人A,https://oakink.net/v2/
+H｜人类第一视角,HOI4D,2400+ clips（论文口径）,ego RGBD/hand-object,对象交互段,交互动作理解,B,项目开放,许可核验,,几何标签关注,https://hoi4d.github.io/
+H｜人类第一视角,MECCANO,行业组装ego videos,video+temporal labels,动作时间戳,组装技能,B,项目开放,核验,,规模不大,https://iplab.dmi.unict.it/MECCANO/
+H｜人类第一视角,50 Salads,50 cooking sequences,多视角视频+action segments,细动作segment,原子操作阶段,B,公开入口,核验,,规模小适合评估,https://cvip.computing.dundee.ac.uk/datasets/food-50-salads/
+H｜人类第一视角,Breakfast Actions,早餐制作程序性视频,video+step labels,动作段,分段基准,B,项目入口,核验,,不是大规模pretrain,https://serre-lab.clps.brown.edu/resource/breakfast-actions-dataset/
+VL｜视频文本与程序,Action100M,~100M time-localized action segments,video+multi-level caption,层级片段及细节caption,大规模视频动作理解,S,10% preview公开,元数据/视频权利分开,,当前公开预览是10%；视频需核验,https://github.com/facebookresearch/Action100M
+VL｜视频文本与程序,LAION-BVD-V-55M,55M captioned clips,video+caption+timestamp,场景级切片,VL规模扩容,S,门控非商用,非商业科研,BVD raw/Image subsets,55M来自2.4M原始视频,https://huggingface.co/datasets/laion/BVD-V-55M
+VL｜视频文本与程序,LAION-BVD-I-300M,300M frames+caption,image/text from video,帧级/scene-shift,图像视觉锚定,A,门控,非商业科研,BVD-V-55M overlap,同源视频不得重复计数,https://projects.laion.ai/bvd/download.html
+VL｜视频文本与程序,LAION-BVD RAW,80M videos/10M hours,raw video,无密集过程标签,超级规模备用池,B,需研究合作申请,非商业科研,BVD-V-55M,不等于可立即通过HF全量下载,https://projects.laion.ai/bvd/download.html
+VL｜视频文本与程序,Panda-70M,70.7M video-text clips / 167K h,video+model-generated captions,短视频caption,Video→Language,S,索引公开/视频条件,原视频版权另核验,HD-VILA derived,含10M/2M缩小版本,https://snap-research.github.io/Panda-70M/
+VL｜视频文本与程序,HD-VILA-100M,100M clips / 371.5K h,video+ASR transcript,~13s clip,动作动态表示预训,A,元信息公开,视频权利需核,Panda-70M source,有URL过期风险,https://github.com/microsoft/XPretrain/tree/main/hd-vila-100m
+VL｜视频文本与程序,InternVid / InternVid-10M,10M及Full版本,video+LLM-caption,clip-level,视频语言预训,A,公开索引,源视频版权核验,,可选择filtered版,https://huggingface.co/collections/OpenGVLab/internvid
+VL｜视频文本与程序,HowTo100M,136M captioned clips / 1.2M source videos,instructional video+ASR,字幕片段时间戳,过程步骤/数据量,S,索引开放/视频可能失效,来源视频版权核验,Action100M可能复用同源,字幕与实际动作不总是同步,https://huggingface.co/datasets/HuggingFaceM4/howto100m
+VL｜视频文本与程序,VidChapters-7M,817K videos / 7M chapters,video+chapter title/time,层级长视频章节,第一层task切分预训,S,元数据开放,源视频版权核验,,章节比机器人subtask粗,https://antoyang.github.io/vidchapters.html
+VL｜视频文本与程序,YouCook2,2K videos / 176h,procedural video+step captions,步骤起止秒数,高质量程序标签,S,公开视频入口,原视频版权核验,,第三视角; 小而精,https://youcook2.eecs.umich.edu/
+VL｜视频文本与程序,FineVideo,43.7K videos / 3425h,video+scene split+dense caption+QA,分场景及长文描写,视频语义与标注模型训练,A,公开数据,许可核验,,影视题材多；低机器人占比,https://huggingface.co/datasets/HuggingFaceFV/finevideo
+VL｜视频文本与程序,Molmo2-Cap,104K videos +431K clips,video+dense long-form captions,clip级、细节丰富,训练标注VLM,S,公开模型数据,许可核验,,2026已开源视频caption资源,https://allenai.org/blog/molmo2
+VL｜视频文本与程序,Molmo2-VideoPoint,160K videos / 300K+ queries,video+point/timestamp language,时空指点,定位对象和局部区域,S,开源数据,许可核验,,空间定位不等于机器人动作,https://allenai.org/molmo
+VL｜视频文本与程序,Molmo2-CapQA,1M video QA,video+Q/A,clip级理解,多任务VL质量增强,A,开源数据,许可核验,Molmo2-Cap,caption二次生成，来源重叠,https://allenai.org/blog/molmo2
+VL｜视频文本与程序,LLaVA-Video-178K,178K caption+960K QA+196K MCQA,video+caption+QA,生成标注时1FPS看帧,时序问答初始化,A,学术用途,academic only,,1FPS是标注采样帧率，不是每秒独立caption,https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K
+VL｜视频文本与程序,LLaVA-OneVision-2 video data,多段长/中/短视频,video+caption+空间推理,多尺度时间片段,长视频理解,A,大规模公开,需逐项核验,,另有Part2长视频shards,https://huggingface.co/datasets/mvp-lab/LLaVA-OneVision-2-Data
+VL｜视频文本与程序,ShareGPT4Video,4.8M captions / 3000h（团队口径）,video+caption,片段/单视频描述,VL预训,A,公开项目,视频源核验,,与Video/HD-VILA等可能重叠,https://github.com/ShareGPT4Omni/ShareGPT4V
+VL｜视频文本与程序,ActivityNet Captions,~20K video /100K captions,video+temporal event captions,dense event segments,事件caption,A,公开索引,视频版权核验,,更通用非操作任务,https://cs.stanford.edu/people/ranjaykrishna/densevid/
+VL｜视频文本与程序,COIN,~11K instructional videos,video+step segments,instruction steps,学习task阶段结构,A,项目公开,核验,,典型程序视频,https://coin-dataset.github.io/
+VL｜视频文本与程序,CrossTask,~4.7K videos /18 tasks,instructional video+step align,weak step boundary,过程规划与分段,B,项目公开,核验,,规模小适合eval,https://github.com/DmZhukov/CrossTask
+VL｜视频文本与程序,ViTT,~8K videos with tutorial steps,video+titles/timestamps,step titles,task segmentation,B,公开入口,核验,,公开视频可能过期,https://ai.googleblog.com/2020/07/introducing-vitt-dataset-for-video.html
+VL｜视频文本与程序,MSR-VTT,10K videos /200K captions,video+natural caption,clip-level,video-text基础,B,项目公开,核验,,非具身操作优先级低,https://www.robots.ox.ac.uk/~maxbain/frozen-in-time/data.html
+VL｜视频文本与程序,Something-Something V2,~220K clips,视频+细动作文本模板,short atomic clips,物体运动关系,A,数据申请,使用条款核验,,动作词强，文本模板单一,https://developer.qualcomm.com/software/ai-datasets/something-something
+VL｜视频文本与程序,Kinetics-700,数十万动作clips,video+class action labels,短动作class,动态编码器,B,链接索引,视频版权核验,,非细粒度推理语言,https://www.deepmind.com/open-source/kinetics
+VL｜视频文本与程序,WebVid-10M,~10M video/text,video+caption,单clip描述,通用视频初始化,B,URL索引,原视频版权需核验,,清洗成本,https://github.com/m-bain/webvid
+VL｜视频文本与程序,VideoCC3M/12M,百万级视频文本,video+caption,clip-level,VL拓展候选,B,核验数据入口,待核验,,需查明确切repo与下载完整性,https://github.com/google-research/scenic
+VL｜视频文本与程序,EgoVLP human corpora,Ego4D/EPIC等处理组合,video+language,clip-level,ego VL基础,B,依赖源数据,各源条款,Ego4D/EPIC,衍生聚合不另计独立小时,https://github.com/showlab/EgoVLP
+I｜图文和空间语义,DataComp-1B,1.39B image-text URL rows,image-text,单图caption,基础视觉语言,A,metadata开放,索引CC BY；图像独立版权,,大量URL需下载过滤,https://huggingface.co/datasets/mlfoundations/datacomp_1b
+I｜图文和空间语义,Re-LAION-5B,5.5B URL+text pairs,image-text,单图描述,图文规模,B,索引开放,图像独立版权,,规模大但噪声与版权高风险,https://laion.ai/projects/
+I｜图文和空间语义,OBELICS,141M documents /353M images,interleaved image-text,多图文上下文,统一transformer序列预训,A,公开,CC BY 4.0（数据卡）,,图像通常是URL不是所有内嵌文件,https://huggingface.co/datasets/HuggingFaceM4/OBELICS
+I｜图文和空间语义,MINT-1T,1T text tokens /3.4B images,interleaved image-text,网页/pdf交错,大规模跨模态序列,A,公开,原始版权需核验,,规模超大不适合作为早期主语料,https://github.com/mlfoundations/MINT-1T
+I｜图文和空间语义,ShareGPT4V-PT,1.246M captions,image+dense caption,丰富图片描述,训练caption VLM,A,公开,图像分源核验,,100K GPT4V high quality,https://github.com/ShareGPT4Omni/ShareGPT4V
+I｜图文和空间语义,LLaVA-1.5 665K,665K instruction items,image+QA,问答,VL SFT/指令理解,A,公开,条款核验,,此链接是150K子集；665K需按github集成,https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K
+I｜图文和空间语义,PixMo-Points,223K images /2.3M question-points,image+phrase+XY,空间定位,补充抓取定位语言,S,开放,许可核验,,需跟踪图像URL有效性,https://huggingface.co/datasets/allenai/pixmo-points
+I｜图文和空间语义,RoboPoint-data,~1.43M robotics affordance examples,image+text+target points,空间指点,方向/contact监督,S,公开,Apache 2.0,,由程序化环境生成,https://huggingface.co/datasets/allenai/Molmo2-ER-RoboPoint
+I｜图文和空间语义,Visual Genome,密集region/object relations,image+region caption+objects,空间关系,物体关系/局部语义,A,开放,条款核验,,无时间轴,https://visualgenome.org/
+I｜图文和空间语义,COCO Captions,~123K images /5 caption each,image+caption,单图语言,视觉基础,B,开放,条款核验,,无机器人场景/动作,https://cocodataset.org/
+I｜图文和空间语义,GQA,~22M compositional questions,image+reasoning QA,空间推理,关系约束,B,开放,许可核验,,从Visual Genome派生,https://cs.stanford.edu/people/dorarad/gqa/
+I｜图文和空间语义,RefCOCO / RefCOCOg,实体指代表达,image+text+bbox,空间grounding,接触区域描述,A,开放入口,许可核验,,COCO衍生,https://github.com/lichengunc/refer
+I｜图文和空间语义,COYO-700M,约700M image-text metadata,image+caption,单图,图文扩量候选,B,公开入口,原图版权核验,,大规模过滤成本,https://github.com/kakaobrain/coyo-dataset
+I｜图文和空间语义,CC3M / CC12M,3M/12M image captions,image+caption,单图,基础V-L,B,URL/访问状态需核验,版权/可用性需核,,部分图像链接不可用,https://ai.google.com/research/ConceptualCaptions/
+T｜工具与索引,FLORA TempSeg+Captioner,模型/非数据集,video→timestamped action captions,自动动作分段和caption,自有1h视频标注主力候选,S,开源权重/研究许可,非商用研究,,示例单视频≤120s；需切块后合并,https://github.com/NVIDIA/Flora
+T｜工具与索引,ProcVLM / ProcCorpus-60M,论文报告60M annotated frames,video→task stage+progress,帧级进度/剩余动作,标注范式与辅助loss,S,公开数据下载待确认,未核验,,不可把论文规模等同可下载数据,https://procvlm.github.io/
+T｜工具与索引,DeMiAn,研究/模型；需核数据,video+fine captions,dense description,语言辅助生成范式,A,项目开放,数据可用性核验,,不将模型项目算作数据集,https://pearls-lab.github.io/demian/
+T｜工具与索引,RoboticsCenter dataset list,机器人数据导航,R/V/A dataset metadata,索引,不断增量发现,A,公开索引,数据各自许可证,,二级目录,https://www.roboticscenter.ai/datasets/manipulation
+T｜工具与索引,RobotData index,44 datasets,机器人数据索引,索引,发现旧型机器人数据,A,公开索引,数据各自许可证,,二次聚合数字需核验,https://robotdata.dev/datasets
+T｜工具与索引,Claru Physical AI index,1000 records,大量社区robot datasets,索引,持续扩大候选,A,公开索引,各自许可证,,索引项质量参差,https://claru.ai/datasets
+T｜工具与索引,OpenBot dataset catalog,288 published records,机器人和VLA,索引,发现近期dense数据集,A,公开索引,各自许可证,,区分论文与真实可下载,https://openbot.ai/datasets
+T｜工具与索引,LeRobot datasets / Hub,上千robot dataset repos,V+A(+L),标准加载,开源社区新增数据发现,S,Hub,各自许可证,,定期扫描同源/镜像/复刻,https://huggingface.co/lerobot
+T｜工具与索引,Awesome ego data,目录,人类ego videos,索引,发现新增人类动作视频,A,开源索引,各自许可证,,部分源需门控,https://github.com/Joeland4/awesome-ego-data
