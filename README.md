@@ -71,3 +71,11 @@ tools/build_data.py         # CSV → JavaScript 数据
 ```
 
 站点不采集任何用户数据，收藏记录只保存在当前浏览器 localStorage。全站源码可直接修改或扩展。
+
+## 严谨标注筛选（新版）
+
+- **同一条监督配对**：内容和时间是 `['stage_text','segment']` 这样的二元组，禁止把一条视频的逐帧 Action 与阶段语言拼成不存在的逐帧语言。
+- **维度**：V/L/机器人 A 模态，标注时间（frame / second / segment / episode / static）、标注内容（Action、Stage Language、Next-step、Spatial 等）、证据状态。不同维度取交集，同组多选取并集。
+- **证据状态**：已核验（`data/facet_reviews.js` 提供官方资料链接）；目录推断（仅从摘要字段猜测）；未知。已核验不代表实际下载并解析数据，更不代表所有标注都经人工核对。
+- 任何数据均不可仅凭逐帧动作推出“每秒一条下一步语言”；阶段重复到每个 timestep 也不是独立帧级 Caption。
+- 人工核验记录独立于 `data/catalog.csv`，继续运行 `python tools/build_data.py` 可更新 117 条原始目录且不覆盖证据字段。

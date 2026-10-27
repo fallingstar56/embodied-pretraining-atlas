@@ -11,6 +11,8 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="data/datasets.js"></script>
+  <script defer src="data/facet_reviews.js"></script>
+  <script defer src="assets/facets.js"></script>
   <script defer src="assets/app.js"></script>
 </head>
 <body>
@@ -68,7 +70,11 @@
             <div class="side-header"><span>FILTERS / 筛选</span><button id="reset-filters" type="button">重置全部</button></div>
             <div class="filter-group"><div class="filter-heading">数据类别 <span id="category-count">05</span></div><div id="category-options" class="category-options"></div></div>
             <div class="filter-group"><div class="filter-heading">研究优先级</div><div id="priority-options" class="check-options"></div></div>
-            <div class="filter-group"><div class="filter-heading">标注粒度</div><div id="grain-options" class="check-options"></div></div>
+            <div class="filter-group"><div class="filter-heading">模态信号</div><div id="modality-options" class="check-options"></div></div>
+            <div class="filter-group"><div class="filter-heading">标注时间尺度</div><div id="temporal-options" class="check-options"></div></div>
+            <div class="filter-group"><div class="filter-heading">标注内容</div><div id="annotation-options" class="check-options"></div></div>
+            <div class="filter-group"><div class="filter-heading">证据状态</div><div id="evidence-options" class="check-options"></div></div>
+            <p class="facet-explainer">不同维度取交集，同组多选取并集。时间与内容必须对应<strong>同一项标注</strong>；“已核验”仅指公开资料支持该标注，不代表下载核验。</p>
             <div class="filter-group"><div class="filter-heading">数据可获取性</div><div id="access-options" class="check-options"></div></div>
             <div class="filter-group filter-toggle"><label for="only-favorites">仅查看收藏</label><input type="checkbox" id="only-favorites" /></div>
             <div class="side-note"><span class="note-icon">i</span><p>规模来自公开项目描述，不等于当前可下载的独立训练样本量。许可证与数据重叠请在使用前复核。</p></div>
