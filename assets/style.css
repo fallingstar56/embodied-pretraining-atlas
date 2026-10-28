@@ -23,3 +23,9 @@ dialog{border:1px solid var(--line);box-shadow:0 35px 95px #10142a4a;background:
 
 /* Conservative annotation facets */
 .facet-explainer{font-size:11px;line-height:1.65;color:var(--muted);border:1px solid var(--line);padding:12px;border-radius:9px}.facet-badges,.pair-list{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.facet-pill,.evidence-label{border:1px solid var(--line);border-radius:6px;padding:3px 6px;font-size:10px;line-height:1.4;color:var(--muted)}.evidence-label{font-weight:650}.evidence-label.reviewed{background:#eaf7f0;color:#267450;border-color:#b8e4ca}.evidence-label.catalog{background:#faf3df;color:#846327;border-color:#eedfb1}[data-theme=dark] .evidence-label.reviewed{background:#173d32;color:#8ee6b4}[data-theme=dark] .evidence-label.catalog{background:#42391f;color:#eed28a}.evidence-link{display:inline-block;margin-top:10px;color:var(--accent,#6256d6);text-decoration:underline}.sidebar .check-option>span{flex:1;min-width:0}.sidebar .check-option small{flex-shrink:0}
+
+/* Evidence states and source audit links. */
+.evidence-label.partial { background:#fff2d4; color:#765400; }
+.evidence-label.not_applicable { background:#e9edf2; color:#4e5868; }
+.audit-downloads { margin:24px 0; font-size:14px; }
+.audit-downloads a { color:var(--accent, #6e62e8); }

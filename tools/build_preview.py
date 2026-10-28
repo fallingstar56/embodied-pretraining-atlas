@@ -5,15 +5,20 @@ import base64
 root=Path(__file__).resolve().parents[1]
 html=(root/'index.html').read_text(encoding='utf-8')
 css=(root/'assets/style.css').read_text(encoding='utf-8')
-data=(root/'data/datasets.js').read_text(encoding='utf-8')
-js=(root/'assets/app.js').read_text(encoding='utf-8')
+scripts=['data/datasets.js','data/annotation_taxonomy.js','data/facet_reviews.js','assets/facets.js','assets/app.js']
+inline=[]
+for src in scripts:
+    code=(root/src).read_text(encoding='utf-8')
+    assert '</script' not in code.lower(), src
+    html=html.replace(f'<script defer src="{src}"></script>', '')
+    inline.append('<script>\n'+code+'\n</script>')
 favicon=(root/'assets/favicon.svg').read_bytes()
 html=html.replace('<link rel="stylesheet" href="assets/style.css" />','<style>\n'+css+'\n</style>')
-html=html.replace('<script defer src="data/datasets.js"></script>','')
-html=html.replace('<script defer src="assets/app.js"></script>','')
 html=html.replace('href="assets/favicon.svg"', 'href="data:image/svg+xml;base64,'+base64.b64encode(favicon).decode('ascii')+'"')
-assert '</script' not in data.lower() and '</script' not in js.lower()
-html=html.replace('</body>', '<script>\n'+data+'\n</script>\n<script>\n'+js+'\n</script>\n</body>')
+for src,mime in [('ANNOTATION_AUDIT.md','text/markdown'),('data/annotation_audit.csv','text/csv')]:
+    payload=base64.b64encode((root/src).read_bytes()).decode('ascii')
+    html=html.replace(f'href="{src}"',f'href="data:{mime};base64,{payload}" download="{Path(src).name}"')
+html=html.replace('</body>', '\n'.join(inline)+'\n</body>')
 out=root.parent/'Embodied_Atlas_Standalone_Preview.html'
 out.write_text(html,encoding='utf-8')
 print('Saved',out,'bytes',out.stat().st_size)

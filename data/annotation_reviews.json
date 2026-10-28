@@ -1,0 +1,2977 @@
+{
+  "RoboInter-Data": {
+    "status": "reviewed",
+    "resourceKind": "derived",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ],
+      [
+        "spatial",
+        "frame"
+      ],
+      [
+        "future_trace",
+        "frame"
+      ],
+      [
+        "spatial",
+        "point"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/InternRobotics/RoboInter-Data"
+    ],
+    "note": "官方 schema 明列 action/state、instruction_add、substask、primitive_skill、time_clip、目标框及未来 10 步夹爪像素轨迹；contact_frame 是接触事件索引。阶段文字按语义区间分类，不能推出逐帧新句或下一步语言。",
+    "pending": "",
+    "alignment": "IR 可按 frame_id 读取；阶段标签可逐帧广播；掩码在 Annotation_raw 中单独存储。",
+    "scope": "含动作的 LeRobot 版与 annotation-only LMDB 的内容不同。",
+    "checkedAt": "2026-10-28"
+  },
+  "RoboInter-VQA": {
+    "status": "reviewed",
+    "resourceKind": "derived",
+    "pairs": [
+      [
+        "qa",
+        "static"
+      ],
+      [
+        "spatial",
+        "static"
+      ],
+      [
+        "future_trace",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/InternRobotics/RoboInter-VQA"
+    ],
+    "note": "公开 schema 以 images + conversations + gt 组织图像问答，包含空间目标、未来轨迹及规划任务；不能因源数据是机器人视频就标成逐帧控制数据。规划问答不等于固定频率下一步语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "FineART": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/lerobot/FineART"
+    ],
+    "note": "全任务文本与带起始时间的子任务列表分开；language_persistent 在各帧重复列表，子任务终点由下一起点或轨迹末尾确定。模型预测下一子任务是训练用途，不是原生每秒新指令。",
+    "pending": "",
+    "alignment": "机器人数据 30 fps；语言按子任务边界更新。",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "FineVLA-Data": {
+    "status": "partial",
+    "resourceKind": "derived",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "sequence"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://finevla.xlang.ai/"
+    ],
+    "note": "官方说明 47,159 条轨迹、220,606 个步骤及十维细粒度过程描述；可确认有序步骤，公开项目页尚不足以确认每步 start/end 时间字段。接触位置的文字描述不自动算坐标标注。",
+    "pending": "核对 FineVLA-Data 发布文件中的步骤边界；确认后才能由未定位步骤序列升级为 segment。",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "AgiBot World 2026": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ],
+      [
+        "spatial",
+        "segment"
+      ],
+      [
+        "progress_failure",
+        "segment"
+      ],
+      [
+        "progress_failure",
+        "point"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/agibot-world/AgiBotWorld2026"
+    ],
+    "note": "tasks.jsonl 给整体任务；Task Frame 与 instruction_segments 给子任务/技能区间；bbox 也是带区间的目标标注。is_result_succeed 与 Error/Success/Intervention Frame 支持结果和事件标注。",
+    "pending": "",
+    "alignment": "区间边界以帧索引存储；错误事件可为单帧。",
+    "scope": "精细字段为可选层，不能假设所有 episode 都齐全。",
+    "checkedAt": "2026-10-28"
+  },
+  "RoboMIND v1.2 / v2": {
+    "status": "partial",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "dense_language",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/x-humanoid-robomind/RoboMIND"
+    ],
+    "note": "数据卡明确 v1.1/v1.2 的 language_description_annotation_json 是 frame-level fine-grained instructions；HDF5 有动作和状态。v2 指向另一个发布集合，不将 v1.2 的覆盖范围自动外推到全部 v2。",
+    "pending": "下载核对 JSON 的帧覆盖率、重复区间及 v2 schema；目前不能确认独立逐帧新句、1 Hz 或下一步/进度字段。",
+    "alignment": "",
+    "scope": "帧级语言结论依据 v1.1/v1.2 更新说明。",
+    "checkedAt": "2026-10-28"
+  },
+  "Galaxea Open-World": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/OpenGalaxea/Galaxea-Open-World-Dataset"
+    ],
+    "note": "官方卡说明中英双语细粒度 subtask language，LeRobot schema 分离状态、动作与任务元数据。子任务语言归阶段，不按机器人采样率升级为独立帧语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "细粒度覆盖按各任务压缩包核对。",
+    "checkedAt": "2026-10-28"
+  },
+  "RoboCasa365": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://robocasa.ai/docs/build/html/use_cases/subtask_annotations.html",
+      "https://robocasa.ai/"
+    ],
+    "note": "官方 subtask_idx/name/stage/lang 按 timestep 存储；同一 subtask_idx 的连续帧构成一个语义阶段。标签由仿真状态生成，不是下一步推理句。",
+    "pending": "",
+    "alignment": "subtask_lang 与 actions/states 逐帧对齐，但阶段内重复。",
+    "scope": "附加标签生成流程覆盖 300 个 composite tasks；标准 pretrain_human300 / leaderboard 数据不能视为已自带这些标签。",
+    "checkedAt": "2026-10-28"
+  },
+  "BEHAVIOR-1K 2026 challenge demos": {
+    "status": "partial",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/behavior-1k/2026-challenge-demos"
+    ],
+    "note": "2026 卡确认 LeRobot v3、100 tasks、30 fps 演示；仅凭任务数和格式不能确认自然语言内容或细粒度 annotation 列。",
+    "pending": "核对 meta/tasks.parquet 和数据 features，补充任务文本及任何新增阶段字段。",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "BEHAVIOR-1K 2025 challenge demos": {
+    "status": "partial",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/behavior-1k/2025-challenge-demos"
+    ],
+    "note": "2025 数据卡列出 30 fps、state/action 与 task_index；任务索引本身不足以证明自然语言字段，亦不证明阶段语言。",
+    "pending": "检查任务表实际文本及 annotation 列的语义和覆盖。",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "AgiBot World Beta": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/agibot-world/AgiBotWorld-Beta"
+    ],
+    "note": "官方 task_info JSON 文档包含任务名，以及 action_config 中带 start/end 的原子技能和语言指令。原目录只写任务级遗漏了文档中的步骤层；key_frame 的详细字段需单独核对。",
+    "pending": "",
+    "alignment": "",
+    "scope": "按 schema 支持分类，不保证每条轨迹 action_config 非空；Alpha 卡仍含历史语言补全 TODO。",
+    "checkedAt": "2026-10-28"
+  },
+  "AgiBot World Alpha": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/agibot-world/AgiBotWorld-Alpha"
+    ],
+    "note": "官方 task_info JSON 文档包含任务名，以及 action_config 中带 start/end 的原子技能和语言指令。原目录只写任务级遗漏了文档中的步骤层；key_frame 的详细字段需单独核对。",
+    "pending": "",
+    "alignment": "",
+    "scope": "按 schema 支持分类，不保证每条轨迹 action_config 非空；Alpha 卡仍含历史语言补全 TODO。",
+    "checkedAt": "2026-10-28"
+  },
+  "RoboInter-Tool（非数据集）": {
+    "status": "not_applicable",
+    "resourceKind": "tool",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://huggingface.co/datasets/InternRobotics/RoboInter-Data",
+      "https://github.com/InternRobotics/RoboInter"
+    ],
+    "note": "RoboInter 的半自动标注代码与工具入口；工具输出能力不能算已经发布的一份额外训练集。数据另见 RoboInter-Data/VQA。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "FineVLA-Tool（非数据集）": {
+    "status": "not_applicable",
+    "resourceKind": "tool",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://finevla.xlang.ai/",
+      "https://github.com/xlang-ai/FineVLA"
+    ],
+    "note": "FineVLA 数据构建工具：统一源数据、筛选及十维步骤描述；不重复计为数据集，也不把工具能力加入数据标注筛选。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Open X-Embodiment": {
+    "status": "reviewed",
+    "resourceKind": "collection",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://github.com/google-deepmind/open_x_embodiment"
+    ],
+    "note": "OXE 是多来源 RLDS 轨迹集合；可确认逐步控制和带任务语言的子集，不能认为所有子集共享语言密度、动作语义或采样率。",
+    "pending": "",
+    "alignment": "",
+    "scope": "这些标签为已知子集的并集，不是全部成员的共有字段。",
+    "checkedAt": "2026-10-28"
+  },
+  "DROID": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://droid-dataset.github.io/"
+    ],
+    "note": "DROID 的语言按 episode 描述任务；官方更新说明约 95% 成功轨迹各有三条文本。机器人控制序列不等于逐帧语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "三条任务文本是成功轨迹子集的覆盖口径。",
+    "checkedAt": "2026-10-28"
+  },
+  "BridgeData V2": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://rail-berkeley.github.io/bridgedata/"
+    ],
+    "note": "官方明确每条轨迹配一条自然语言任务指令；与视觉和控制序列配对，不包含由此可推导的阶段或下一步语言标签。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "RH20T": {
+    "status": "partial",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://rh20t.github.io/"
+    ],
+    "note": "官方列出同步视觉、力、音频、动作与对应人类示范。任务列表可用于区分任务，但本次资料不足以确认原始 RH20T 每 episode 的自然语言字段。",
+    "pending": "核对任务描述文件；RoboInter/FineVLA 二次语言不可回填成 RH20T 原生标注。",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "InternData-A1": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/InternRobotics/InternData-A1"
+    ],
+    "note": "官方提供 LeRobot task 表、episode 数据及 30 fps 的 state/action features；项目是混合仿真与真实数据，原目录仅写仿真不完整。未确认步骤语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "各 embodiment/schema 可能不同。",
+    "checkedAt": "2026-10-28"
+  },
+  "RoboTwin 2.0 unified": {
+    "status": "partial",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/lerobot/robotwin_unified"
+    ],
+    "note": "指定 lerobot/robotwin_unified 仓库预览显示 30 fps ALOHA 演示，但无 dataset card；不能把 RoboTwin 论文的所有语言能力自动转成此转换版的字段。",
+    "pending": "核对该转换版 meta/info.json 和 tasks.jsonl，并确认与 RoboTwin 2.0 的版本对应。",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "RoboCasa 2024": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://robocasa.ai/assets/robocasa_rss24.pdf"
+    ],
+    "note": "2024 RoboCasa 论文描述任务指令与人类/生成演示；本条锁定 2024 数据，不继承 365 后续新增的 subtask 标注流程。",
+    "pending": "",
+    "alignment": "",
+    "scope": "2024 发布版本。",
+    "checkedAt": "2026-10-28"
+  },
+  "RoboMimic": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "action_class",
+        "episode"
+      ],
+      [
+        "reward",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://robomimic.github.io/docs/datasets/overview.html"
+    ],
+    "note": "原生 robomimic HDF5 是按任务组织的 states/actions/rewards/dones；env_name 为任务标识。框架后来支持 language-conditioned learning 不证明原始各数据集自带自然语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "MimicGen": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "action_class",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://mimicgen.github.io/",
+      "https://robomimic.github.io/docs/datasets/overview.html"
+    ],
+    "note": "MimicGen 从少量示范生成按任务组织的控制轨迹；任务名称、生成用子任务分解不等于发布了自然语言阶段注释。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "LIBERO": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://github.com/Lifelong-Robot-Learning/LIBERO/blob/master/README.md?plain=1",
+      "https://arxiv.org/abs/2306.03310"
+    ],
+    "note": "LIBERO API 提供 task.language 与对应 BDDL 任务和演示；指令描述整个任务，即便任务含多个操作也不能直接当作有边界的阶段语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "CALVIN": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://github.com/mees/calvin",
+      "https://github.com/mees/calvin/blob/main/dataset/README.md"
+    ],
+    "note": "CALVIN 为连续 play 轨迹配短时语言目标；任务评测按多条指令组成长序列。动作 30 Hz，不意味着语言按 30 Hz 独立标注。",
+    "pending": "",
+    "alignment": "",
+    "scope": "语言只覆盖选定的 play 区间。",
+    "checkedAt": "2026-10-28"
+  },
+  "TACO-Play": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://github.com/tensorflow/datasets/blob/master/docs/catalog/taco_play.md"
+    ],
+    "note": "公开 RLDS 转换 schema 含 natural_language_instruction 和多种控制动作；文字可由结构化任务同义表达生成。逐 step 存储不能推出逐 step 新语义。",
+    "pending": "",
+    "alignment": "",
+    "scope": "此结论针对 OXE/TFDS 导出版；原始连续 play 的额外结构未统一。",
+    "checkedAt": "2026-10-28"
+  },
+  "Language Table": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://github.com/google-research/language-table"
+    ],
+    "note": "官方按语言重标后的 episode 发布真实及仿真数据；人工与脚本语言来源不同。对原始连续交互中的片段而言，这些导出 episode 各有目标指令。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "RT-1 / Fractal": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://robotics-transformer1.github.io/"
+    ],
+    "note": "任务自然语言作为条件，图像/动作按 timestep 配对；RT-1 的时间步控制频率不能作为语言标注频率。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "BC-Z": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://sites.google.com/view/bc-z/home"
+    ],
+    "note": "官方说明按自然语言任务条件采集 100 类操控示范；自然语言或人类视频是任务条件，未说明步骤边界语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "RoboNet": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://www.robonet.wiki/"
+    ],
+    "note": "RoboNet 为机器人视觉与动作经验数据库，用于预测/控制；未发现可确认的自然语言监督，不从机器人任务用途推断语言标签。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "RoboSet": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://robopen.github.io/roboset/"
+    ],
+    "note": "官方 RoboSet 页面除控制演示外明确说明 task 由 language instruction 定义；原目录仅 action-level 漏记任务语言。活动由多个 task 组成不证明帧级阶段边界。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "ALOHA Unleashed": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "action_class",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://aloha-unleashed.github.io/"
+    ],
+    "note": "公开项目描述按任务采集多相机双臂控制示范；可确认关节/控制轨迹与任务分组，不把网页的任务介绍当作数据文件中的自然语言标注。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "ALOHA Static": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "action_class",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://tonyzhaozh.github.io/aloha/"
+    ],
+    "note": "公开项目描述按任务采集多相机双臂控制示范；可确认关节/控制轨迹与任务分组，不把网页的任务介绍当作数据文件中的自然语言标注。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Mobile ALOHA": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "action_class",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://mobile-aloha.github.io/"
+    ],
+    "note": "公开项目描述按任务采集多相机双臂控制示范；可确认关节/控制轨迹与任务分组，不把网页的任务介绍当作数据文件中的自然语言标注。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Dobb-E": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "effector_motion",
+        "frame"
+      ],
+      [
+        "action_class",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://dobb-e.com/"
+    ],
+    "note": "HoNY 训练集由手持 Stick 采集，官方列 30 fps RGB-D、6D 夹爪位姿和开合角；它是代理末端动作示范，不能写成机器人实测关节动作或自然语言任务集。",
+    "pending": "",
+    "alignment": "",
+    "scope": "Dobb-E 的 HoNY 数据；机器人部署结果另算。",
+    "checkedAt": "2026-10-28"
+  },
+  "FastUMI-100K": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "effector_motion",
+        "frame"
+      ],
+      [
+        "action_class",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/fastumi100k/fastumi100k"
+    ],
+    "note": "UMI 手持夹爪演示以 20 fps 发布，7D/14D 相对末端 state/action 和按任务组织目录。数值被命名 action 仍需区分手持代理轨迹和机器人执行命令。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "10Kh RealOmni": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "effector_motion",
+        "frame"
+      ],
+      [
+        "action_class",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/genrobot2025/10Kh-RealOmin-OpenData"
+    ],
+    "note": "Gen DAS Gripper 采集的 MCAP 提供同步夹爪开合、VIO eef_pose 和任务/技能目录。公开 topic 列表未建立自然语言事件字段。",
+    "pending": "",
+    "alignment": "",
+    "scope": "不能将营销说明中的 annotations 直接解释成 dense language。",
+    "checkedAt": "2026-10-28"
+  },
+  "Gen-HumanEgo": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "human_motion",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/genrobot2025/Gen-HumanEgo"
+    ],
+    "note": "官方列逐帧手部关键点/MANO，以及有时间边界的 video→task→subtask 语义标注。人体运动不是机器人控制；深度图是视觉模态，不单独等同于物体框标签。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Galaxea / RoboCOIN source": {
+    "status": "not_applicable",
+    "resourceKind": "index",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://finevla.xlang.ai/"
+    ],
+    "note": "本条名称混合 Galaxea 与 RoboCOIN，来源实际是 FineVLA 的源数据统计表，不能定义唯一数据版本或公共标注 schema。保留为来源关系记录，不重复算一套细粒度标注。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28",
+    "categoryOverride": "tool"
+  },
+  "Open-H-Embodiment": {
+    "status": "reviewed",
+    "resourceKind": "collection",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment"
+    ],
+    "note": "Open-H 是医疗/手术及超声机器人多来源集合；官方明确视频与运动学按行对齐，未保证全部来源有自然语言。H 不代表 humanoid 或 human 手部数据。",
+    "pending": "",
+    "alignment": "",
+    "scope": "不同医疗来源独立核对语义字段。",
+    "checkedAt": "2026-10-28"
+  },
+  "NVIDIA GR00T X-Embodiment Sim": {
+    "status": "partial",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "action_class",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim"
+    ],
+    "note": "官方提供跨机器人与人形仿真任务轨迹；按任务命名的数据包可确认任务身份，但不由任务名猜测逐步语言。",
+    "pending": "检查具体包的 annotation.human.action.task_description 与 tasks 表，再增加 task_text。",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "LeRobot SO-100 / SO-101 community": {
+    "status": "not_applicable",
+    "resourceKind": "index",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://huggingface.co/lerobot"
+    ],
+    "note": "SO-100/SO-101 community 只指社区数据族，当前入口是组织主页；不同上传者的任务、fps、语言和控制字段不可合并为同一数据集事实。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28",
+    "categoryOverride": "tool"
+  },
+  "ManiSkill2/3 trajectories": {
+    "status": "reviewed",
+    "resourceKind": "collection",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "action_class",
+        "episode"
+      ],
+      [
+        "progress_failure",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "A"
+    ],
+    "sources": [
+      "https://github.com/mani-skill/ManiSkill/blob/main/docs/source/user_guide/datasets/demos.md"
+    ],
+    "note": "官方演示格式含 actions/env_states 和任务 env_id；success/fail 为可选逐 timestep 布尔值。可回放渲染 RGB-D 不等于原始压缩包有图像或自然语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "主要依据 ManiSkill3 schema；v2/不同任务应分别检查。",
+    "checkedAt": "2026-10-28"
+  },
+  "RLBench": {
+    "status": "partial",
+    "resourceKind": "collection",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://github.com/stepjam/RLBench"
+    ],
+    "note": "RLBench 提供任务 variation 描述和逐步 Observation 演示，含视觉、机器人状态，分割/深度取决于观测配置。生成环境与某个固定下载版本应区分。",
+    "pending": "确认具体演示下载版本是否保存分割掩码；目前不把配置可生成的空间观测算作已发布标注。",
+    "alignment": "",
+    "scope": "空间标签为配置可生成观测；具体演示包需检查保存配置。",
+    "checkedAt": "2026-10-28"
+  },
+  "MetaWorld": {
+    "status": "not_applicable",
+    "resourceKind": "benchmark",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://github.com/Farama-Foundation/Metaworld"
+    ],
+    "note": "给出的官方仓库是 Meta-World 环境/benchmark，API 可产生 state/action/reward，但未指定任何固定演示数据发行版。排除出已发布标注筛选。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28",
+    "categoryOverride": "tool"
+  },
+  "FMB functional manipulation": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "A"
+    ],
+    "sources": [
+      "https://functional-manipulation-benchmark.github.io/dataset/"
+    ],
+    "note": "FMB 的 primitive 是每 timestep 一个字符串类别，动作/状态也逐步对齐；阶段内类别重复，属于结构化技能而非自然语言 caption。",
+    "pending": "",
+    "alignment": "primitive 数组长度 N，与动作对齐；语义粒度为技能阶段。",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "HA-Ego-500": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://ego500.humanarchive.ai/"
+    ],
+    "note": "官方描述含操作步骤时间边界、阶段与逐手状态；可见物体清单不是坐标框。平均步骤时长不构成固定每秒语言标注。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Ego4D Narrations": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "point"
+      ],
+      [
+        "observed_caption",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://ego4d-data.org/docs/data/annotations-schemas/"
+    ],
+    "note": "narration_pass 的 narration_text 关联单个 timestamp_sec/frame；summary_text 另有 start_sec/end_sec。点叙述与区间摘要分开，不把全部旁白当动作边界。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Ego4D Goal-Step": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "task_text",
+        "segment"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/facebookresearch/ego4d-goalstep"
+    ],
+    "note": "goal 与 step 都有 start/end 和描述/类别；长视频内部可有多个目标。is_continued 表示跨片段延续，不能解释为成功/失败或完成进度。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Ego-Exo4D V2": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "human_motion",
+        "point"
+      ],
+      [
+        "observed_caption",
+        "point"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ],
+      [
+        "progress_failure",
+        "point"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://docs.ego-exo4d-data.org/annotations/",
+      "https://docs.ego-exo4d-data.org/annotations/atomic_descriptions/",
+      "https://docs.ego-exo4d-data.org/annotations/keystep/",
+      "https://docs.ego-exo4d-data.org/annotations/ego_pose/",
+      "https://docs.ego-exo4d-data.org/annotations/proficiency_estimation/"
+    ],
+    "note": "Atomic descriptions 是带时间点的文字；keystep 有起止时间、步骤 ID 和说明；EgoPose 是人体/手部姿态。不同标注来自不同子集。 EgoPose 仅在有有效标注的 frame_number 给姿态，不承诺全帧；专家的良好执行/改进建议也是时间点。",
+    "pending": "",
+    "alignment": "",
+    "scope": "V2 包含 V1 延续和新增标注；并非每个视频都有所有层。",
+    "checkedAt": "2026-10-28"
+  },
+  "EPIC-KITCHENS-100": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "segment"
+      ],
+      [
+        "action_class",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/epic-kitchens/epic-kitchens-100-annotations"
+    ],
+    "note": "动作 narration 配 start/end 时间及 verb/noun 类别；文字是区间动作描述，不是逐帧独立指令，也不含由此自动推导的下一步语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "EPIC-KITCHENS VISOR": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "spatial",
+        "point"
+      ],
+      [
+        "spatial",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://epic-kitchens.github.io/VISOR/"
+    ],
+    "note": "VISOR 提供稀疏人工像素掩码及传播得到的密集掩码，并有手物交互关系；不继承 EPIC 全套自然语言，也不是机器人动作。",
+    "pending": "",
+    "alignment": "人工关键帧与插值/传播帧必须区分；密集层非逐帧人工标注。",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "HoloAssist": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "human_motion",
+        "frame"
+      ],
+      [
+        "action_class",
+        "segment"
+      ],
+      [
+        "asr",
+        "segment"
+      ],
+      [
+        "progress_failure",
+        "segment"
+      ],
+      [
+        "observed_caption",
+        "episode"
+      ],
+      [
+        "observed_caption",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://holoassist.github.io/",
+      "https://holoassist.github.io/data_links/README.html"
+    ],
+    "note": "同步手/头姿态与视线；细粗粒度动作、对话及错误/干预类型标注。对话指导可用于辅助任务，但不等于统一每秒下一步指令。 原始 schema 还提供全视频 Narration 和区间 Action sentence。",
+    "pending": "",
+    "alignment": "",
+    "scope": "对话转写归口语文本；错误标注以动作/干预区间为单位。",
+    "checkedAt": "2026-10-28"
+  },
+  "EgoDex": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "human_motion",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/apple-aiml-research/ml-egodex"
+    ],
+    "note": "30 Hz 头部、身体和手部 transforms；HDF5 attributes 的 llm_description/llm_description2 是轨迹描述，不是每帧新句。",
+    "pending": "",
+    "alignment": "姿态逐帧，自动语言在 episode 属性中。",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Assembly101": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "human_motion",
+        "frame"
+      ],
+      [
+        "action_class",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://assembly-101.github.io/"
+    ],
+    "note": "官方含粗细两级装配动作区间与 3D 手姿态；动作标签不能自动等同自然语言描述。项目另有错误检测标注发布，具体错误区间字段本次未纳入。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "EgoSuite-Open100K": {
+    "status": "partial",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "human_motion",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://huggingface.co/blog/LightwheelAI/egosuite-open100k"
+    ],
+    "note": "官方分期发布姿态/视频，语义事件标注为选定子集；100K 是目标集合名，首批 10K 与全部规模不可混用。",
+    "pending": "分别核对 EgoDemo/EgoStandard 的已发布 features、语义文本及时间边界；不将规划中的语义层记为已可用。",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Egocentric-10K": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/builddotai/Egocentric-10K"
+    ],
+    "note": "官方 Egocentric-10K 卡的公开结构为视频及相机/工厂/时长等技术元数据；未找到可确认的任务句、动作区间或人体姿态标注。无标签表示本次未确认所列监督，不等于视频不可用。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Egocentric-100K": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/builddotai/Egocentric-100K"
+    ],
+    "note": "官方 Egocentric-100K 卡的公开结构为视频及相机/工厂/时长等技术元数据；未找到可确认的任务句、动作区间或人体姿态标注。无标签表示本次未确认所列监督，不等于视频不可用。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "EgoVerse": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "human_motion",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://egoverse.ai/",
+      "https://github.com/GaTech-RL2/EgoVerse/blob/main/CONTRIBUTING_DATA.md"
+    ],
+    "note": "官方 Zarr v3 schema 将 task_description 与 annotations 分开；后者为 text/start_idx/end_idx 的子步骤区间。头部和左右手运动按帧存储；不是逐帧独立语言。",
+    "pending": "",
+    "alignment": "annotation_v1 使用半开帧区间 [start_idx,end_idx)。",
+    "scope": "annotations 是可选层，允许为空、重叠或不覆盖整条轨迹；不能把规范要求视为全量覆盖。",
+    "checkedAt": "2026-10-28"
+  },
+  "EgoSteer-Egocentric": {
+    "status": "reviewed",
+    "resourceKind": "derived",
+    "pairs": [
+      [
+        "human_motion",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/EgoSteer/EgoSteer-Egocentric"
+    ],
+    "note": "原始或估计的人手轨迹转换成统一表示；每 episode 有最多五条 LLM 生成指令。actions 中下一帧人体状态不是机器人实测动作；填充关节也不是有效机器人控制。",
+    "pending": "",
+    "alignment": "30 Hz 人体状态；语言按 episode。",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "EgoSteer-RealWorld": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_state",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "sequence"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/EgoSteer/EgoSteer-RealWorld"
+    ],
+    "note": "实机轨迹附三层指令：动作目标、手物描述和有序功能步骤。第三层是整条轨迹中的步骤列表，未确认逐步骤时间边界；不能升级为 segment。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "ARCTIC": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "human_motion",
+        "frame"
+      ],
+      [
+        "spatial",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://arctic.is.tue.mpg.de/"
+    ],
+    "note": "同步 3D 手部和可动对象网格/姿态及动态接触标签；人体运动与物体几何均按帧，没有据此确认任务语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "OakInk2": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "human_motion",
+        "frame"
+      ],
+      [
+        "spatial",
+        "frame"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://oakink.net/v2/",
+      "https://github.com/oakink/OakInk2"
+    ],
+    "note": "全身/手部/物体运动与任务语言；program_info 的左右手区间映射 primitive，desc_info 按区间给 seg_desc。程序依赖图不等于下一步自然语言标签。",
+    "pending": "",
+    "alignment": "",
+    "scope": "程序图/描述的覆盖依具体任务与发布文件。",
+    "checkedAt": "2026-10-28"
+  },
+  "HOI4D": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "human_motion",
+        "frame"
+      ],
+      [
+        "spatial",
+        "frame"
+      ],
+      [
+        "action_class",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://hoi4d.github.io/"
+    ],
+    "note": "逐帧手/物体姿态与全景分割；动作分割是连续区间类别。没有证据把动作类名解释为自由语言旁白。",
+    "pending": "",
+    "alignment": "动作类别可广播到帧，其语义单位仍是动作区间。",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "MECCANO": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_class",
+        "segment"
+      ],
+      [
+        "spatial",
+        "point"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://github.com/fpv-iplab/MECCANO",
+      "https://iplab.dmi.unict.it/legacy/MECCANO/"
+    ],
+    "note": "工业装配动作起止区间与类别；active-object 标注针对抽取帧提供边界框。未来动作预测是评测用途，不是下一步文字标注。",
+    "pending": "",
+    "alignment": "",
+    "scope": "同步视线/深度流不单独归为机器人状态。",
+    "checkedAt": "2026-10-28"
+  },
+  "50 Salads": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_class",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://discovery.dundee.ac.uk/en/datasets/50-salads/"
+    ],
+    "note": "沙拉制作 RGB-D/加速度数据配动作分段类别；固定外部视角，不是第一人称。动作标签不是步骤自由文本。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28",
+    "categoryOverride": "video"
+  },
+  "Breakfast Actions": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_class",
+        "episode"
+      ],
+      [
+        "action_class",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://serre.lab.brown.edu/breakfast-actions-dataset.html"
+    ],
+    "note": "10 类整体早餐活动与 48 类细粒度动作单元；多外部相机拍摄，原目录第一视角分类不准确。类名不等同自然语言任务指令。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28",
+    "categoryOverride": "video"
+  },
+  "Action100M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "episode"
+      ],
+      [
+        "observed_caption",
+        "segment"
+      ],
+      [
+        "observed_caption",
+        "point"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "action_class",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/facebookresearch/Action100M"
+    ],
+    "note": "层级节点含 start/end、parent/level、动作与描述，叶节点中间帧还有图像描述；root 是全视频摘要。层级密集语义不代表固定 1 Hz 语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "公开仓库当前展示约 10% 预览，不能把总目标规模当完整已下载量。",
+    "checkedAt": "2026-10-28"
+  },
+  "LAION-BVD-V-55M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://projects.laion.ai/bvd/download.html",
+      "https://laion.ai/projects/"
+    ],
+    "note": "官方 BVD-V 为 captioned video clips；整 clip 的描述不等同内部阶段边界或逐帧文字。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "LAION-BVD-I-300M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "image_text",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://projects.laion.ai/bvd/download.html",
+      "https://laion.ai/projects/"
+    ],
+    "note": "BVD-I 是从视频取得的带描述图像；发布单元为图文对，不因来源是视频而变成带时序语言的轨迹。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28",
+    "categoryOverride": "image"
+  },
+  "LAION-BVD RAW": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://projects.laion.ai/bvd/download.html"
+    ],
+    "note": "RAW 是原始视频池，与 BVD-V/I 标注衍生集分开；不能把衍生集 caption 回填为 RAW 自带标注。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Panda-70M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://snap-research.github.io/Panda-70M/"
+    ],
+    "note": "发布单位为短视频与合成 caption；模型筛选/场景切分不构成动作阶段标签。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "HD-VILA-100M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "asr",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/microsoft/XPretrain/tree/main/hd-vila-100m"
+    ],
+    "note": "100M 视频 clip 与语音识别文本配对；字幕对齐的是说话内容，不能当作人工视觉行为描述或细粒度阶段指令。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "InternVid / InternVid-10M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/OpenGVLab/InternVid"
+    ],
+    "note": "InternVid-10M-FLT JSONL 明列 videoID、timestamps、generated caption 与相似度；timestamps 定位整个裁剪单元，不提供内部连续阶段文本。",
+    "pending": "",
+    "alignment": "",
+    "scope": "明确核查 10M-FLT；不同筛选版本不能重复累加。",
+    "checkedAt": "2026-10-28"
+  },
+  "HowTo100M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "asr",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://www.di.ens.fr/willow/research/howto100m/"
+    ],
+    "note": "YouTube ASR 字幕按语音区间配视频；字幕与可见操作可能有时差，不能标为人工步骤/视觉叙述。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "VidChapters-7M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "stage_text",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://antoyang.github.io/vidchapters.html"
+    ],
+    "note": "用户章节标题与章节时间边界；章节是语义区间，不一定是机器人子任务，也不代表逐帧语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "YouCook2": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "spatial",
+        "point"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://youcook2.eecs.umich.edu/",
+      "https://youcook2.eecs.umich.edu/download"
+    ],
+    "note": "烹饪过程有 start/end 及英文祈使步骤句；另外发布 YouCook2-BB 的采样帧物体框。框只属于附加层，原始步骤文本不含逐帧坐标。",
+    "pending": "",
+    "alignment": "",
+    "scope": "步骤 Train/Val；Test 公开边界但文本不可一概视为可用；BB 是单独下载。",
+    "checkedAt": "2026-10-28"
+  },
+  "FineVideo": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "episode"
+      ],
+      [
+        "observed_caption",
+        "segment"
+      ],
+      [
+        "asr",
+        "segment"
+      ],
+      [
+        "observed_caption",
+        "point"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/HuggingFaceFV/finevideo"
+    ],
+    "note": "视频摘要和带 start/end timestamp 的场景描述；口语转写独立于视觉描述。场景情绪/主题等丰富字段不是逐秒行为标签。 narrativeProgression/keyMoments 另有时间点描述。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Molmo2-Cap": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "episode"
+      ],
+      [
+        "observed_caption",
+        "segment"
+      ],
+      [
+        "observed_caption",
+        "point"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/allenai/Molmo2-Cap"
+    ],
+    "note": "video/merged caption 是全视频；clip_timestamps/captions 是子片段；frame_timestamps/indices 与 frame_captions 对应抽样帧。三层分开，不能把抽帧描述称全帧覆盖。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Molmo2-VideoPoint": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "spatial",
+        "point"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/allenai/Molmo2-VideoPoint"
+    ],
+    "note": "点坐标与 timestamps 对应，另有对象查询与计数。视频重编码到 2 FPS 是取样网格，不证明每一帧都有标签，也不是每秒一次语言；VideoTrack 的轨迹不能移入本条。",
+    "pending": "",
+    "alignment": "稀疏点标注，2 FPS 视频时间网格。",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Molmo2-CapQA": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "qa",
+        "episode"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/allenai/Molmo2-VideoCapQA"
+    ],
+    "note": "官方实际名称为 Molmo2-VideoCapQA：全视频多选视觉问答；关于位置的问题不等于提供物体坐标标签。保留目录旧名便于兼容。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "LLaVA-Video-178K": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "clip"
+      ],
+      [
+        "qa",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K"
+    ],
+    "note": "合成整段视频描述及开放/多选问答；1 FPS 抽帧用于模型输入，不是逐秒独立语言监督。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "LLaVA-OneVision-2 video data": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/mvp-lab/LLaVA-OneVision-2-Data"
+    ],
+    "note": "视频子集提供多长度片段与描述；数据包中的独立图像/空间数据不自动赋予本视频条目逐帧空间标签。",
+    "pending": "",
+    "alignment": "",
+    "scope": "仅本条所指 video data；30/60/180 秒等是片段长度，不是语言频率。",
+    "checkedAt": "2026-10-28"
+  },
+  "ShareGPT4Video": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "clip"
+      ],
+      [
+        "observed_caption",
+        "point"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/ShareGPT4Video/ShareGPT4Video",
+      "https://github.com/ShareGPT4Omni/ShareGPT4Video"
+    ],
+    "note": "官方 40K schema 有 timestamp、keyframe 和按 idx 的 captions，支持视频描述及关键帧描述；4.8M 扩充集与人工辅助 40K 不同。原目录误连到图像版 ShareGPT4V。",
+    "pending": "",
+    "alignment": "关键帧抽样不等于全帧语言。",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "ActivityNet Captions": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1705.00754"
+    ],
+    "note": "每个事件描述有独立 start/end，可重叠且长短不一；dense caption 的 dense 指事件覆盖，不是固定采样频率。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "COIN": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_class",
+        "episode"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://coin-dataset.github.io/",
+      "https://github.com/coin-dataset/annotation"
+    ],
+    "note": "任务类别与带起止时间的步骤 ID/步骤名；规范化步骤名称归结构化阶段，不按自由撰写自然语言句子处理。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "CrossTask": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "stage_text",
+        "sequence"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "stage_struct",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/DmZhukov/CrossTask"
+    ],
+    "note": "每个任务有有序步骤说明；18 个 primary tasks 另有步骤区间，related tasks 不具相同边界覆盖。1 Hz 特征不是 1 Hz 语言。",
+    "pending": "",
+    "alignment": "",
+    "scope": "区间标签仅 primary annotated videos；未定位步骤列表是 sequence。",
+    "checkedAt": "2026-10-28"
+  },
+  "ViTT": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "stage_text",
+        "segment"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/google-research-datasets/Video-Timeline-Tags-ViTT"
+    ],
+    "note": "ViTT 的 timestamp 是步骤/章节起点，tag 为文字；终点由下一起点或视频结尾界定。与只有发生点、无区间意义的 narration 不同。",
+    "pending": "",
+    "alignment": "毫秒起点；按相邻边界重建区间。",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "MSR-VTT": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://www.microsoft.com/en-us/research/publication/msr-vtt-a-large-video-description-dataset-for-bridging-video-and-language/"
+    ],
+    "note": "短 clip 各有多条独立人工描述，描述整个 clip；不附各句对应的内部事件边界。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Something-Something V2": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_class",
+        "clip"
+      ],
+      [
+        "observed_caption",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://www.qualcomm.com/developer/software/something-something-v-2-dataset"
+    ],
+    "note": "174 个动作模板类别及代入对象名的实例模板；它是整 clip 的模板化文字，不是自由 dense caption，也不含由对象名推导的定位坐标。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Kinetics-700": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "action_class",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V"
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1907.06987"
+    ],
+    "note": "700 个动作类别对应约 10 秒 clip；动作类名不当作自由语言 caption 或机器人动作监督。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "WebVid-10M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/m-bain/webvid"
+    ],
+    "note": "短视频与网络文字描述配对；1 FPS CLIP features 不等于逐秒 caption。官方于 2024-02-23 撤下 URL 与 caption 下载，仓库仍在不代表原数据继续分发。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "VideoCC3M/12M": {
+    "status": "partial",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "observed_caption",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136740396.pdf"
+    ],
+    "note": "VideoCC 用图文语料弱匹配挖掘短视频，文本并非逐视频人工精标。可确认 VideoCC/3M 类配对；目录合写的 12M 版本尚缺唯一数据发布依据。",
+    "pending": "确认 VideoCC12M 的具体版本、下载地址与样本口径；scenic 代码总入口不能证明该版本存在。",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "EgoVLP human corpora": {
+    "status": "reviewed",
+    "resourceKind": "derived",
+    "pairs": [
+      [
+        "observed_caption",
+        "clip"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/showlab/EgoVLP"
+    ],
+    "note": "实际可定位的语料是 EgoVLP 发布的 EgoClip：从 Ego4D narration 时间附近构造 clip-text 对。clip 边界由抽取策略产生，不等同人工动作起止。",
+    "pending": "",
+    "alignment": "",
+    "scope": "EgoClip；不将 EgoMCQ 评测集问答自动加入整个训练语料。",
+    "checkedAt": "2026-10-28"
+  },
+  "DataComp-1B": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "image_text",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/mlfoundations/datacomp_1b"
+    ],
+    "note": "图像 URL 与网络文本/过滤元数据；检测框等筛选附属信息不能直接等同专门的空间监督集。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Re-LAION-5B": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "image_text",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://laion.ai/blog/relaion-5b/"
+    ],
+    "note": "重新筛选的 LAION 图像 URL/文本元数据；属于静态图文对，不含任务时间结构。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "OBELICS": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "interleaved",
+        "document"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/HuggingFaceM4/OBELICS",
+      "https://huggingface.co/blog/obelics"
+    ],
+    "note": "网页中的图片与文字按文档顺序交错组织；不是所有文本与单张图片一一配对，更没有视频时间轴。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "MINT-1T": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "interleaved",
+        "document"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/mlfoundations/MINT-1T"
+    ],
+    "note": "HTML/PDF/arXiv 文档的交错图文序列；document 顺序是阅读结构，不是操作阶段或时序视频。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "ShareGPT4V-PT": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "image_text",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/ShareGPT4Omni/ShareGPT4V/blob/master/docs/Data.md"
+    ],
+    "note": "ShareCaptioner 生成的长图像描述用于预训练；描述详细度不构成时间密度，不能标成 dense temporal language。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "LLaVA-1.5 665K": {
+    "status": "reviewed",
+    "resourceKind": "collection",
+    "pairs": [
+      [
+        "qa",
+        "static"
+      ],
+      [
+        "image_text",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/haotian-liu/LLaVA",
+      "https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json"
+    ],
+    "note": "665K mix 是图像指令/问答与描述的混合集合；部分记录纯文本。原链接名为 Instruct-150K，但具体 665K 文件及训练文档定义版本，不按仓库名误判规模。",
+    "pending": "",
+    "alignment": "",
+    "scope": "各子集字段不同；不是每条问答都同时带 caption。",
+    "checkedAt": "2026-10-28"
+  },
+  "PixMo-Points": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "spatial",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/allenai/pixmo-points"
+    ],
+    "note": "图像中的对象文字引用、点坐标和计数；核心是 pointing/grounding，不因含文字就泛化为整图 caption。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "RoboPoint-data": {
+    "status": "reviewed",
+    "resourceKind": "collection",
+    "pairs": [
+      [
+        "spatial",
+        "static"
+      ],
+      [
+        "qa",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://huggingface.co/datasets/wentao-yuan/robopoint-data",
+      "https://huggingface.co/datasets/allenai/Molmo2-ER-RoboPoint"
+    ],
+    "note": "RoboPoint 原始混合数据有空间指向、检测与 VQA；原目录 Ai2 链接是重打包版本，规模和子集需分别计算。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Visual Genome": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "image_text",
+        "static"
+      ],
+      [
+        "spatial",
+        "static"
+      ],
+      [
+        "qa",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://hci.stanford.edu/publications/paper.php?id=335",
+      "https://github.com/ranjaykrishna/visual_genome_python_driver"
+    ],
+    "note": "区域描述、对象框/属性/关系及问答是不同静态标注层。旧 visualgenome.org 当前内容与研究无关，替换为作者论文和代码入口。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "COCO Captions": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "image_text",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1504.00325",
+      "https://cocodataset.org/"
+    ],
+    "note": "每图多个人工 caption；本条只指 COCO Captions，不继承 COCO 独立实例分割、关键点等任务的标签。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "GQA": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "qa",
+        "static"
+      ],
+      [
+        "spatial",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://cs.stanford.edu/people/dorarad/gqa/download.html",
+      "https://arxiv.org/abs/1902.09506"
+    ],
+    "note": "基于场景图的组合推理问答，场景图含对象与关系；QA 和 scene graph 下载属于不同层，不能把问句中的空间词直接当坐标。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "RefCOCO / RefCOCOg": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "spatial",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/lichengunc/refer"
+    ],
+    "note": "指代表达绑定 COCO 对象 annotation ID/区域，属于 referring expression grounding；不归普通整图描述。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "COYO-700M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "image_text",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/kakaobrain/coyo-dataset"
+    ],
+    "note": "网络图像与 alt-text 配对，附质量/过滤元数据；无任务时间边界或机器人状态。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "CC3M / CC12M": {
+    "status": "reviewed",
+    "resourceKind": "dataset",
+    "pairs": [
+      [
+        "image_text",
+        "static"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://github.com/google-research-datasets/conceptual-captions",
+      "https://github.com/google-research-datasets/conceptual-12m"
+    ],
+    "note": "CC3M/CC12M 是 image URL + caption 对；两个集合版本分别维护，不是视频字幕或连续步骤。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "FLORA TempSeg+Captioner": {
+    "status": "not_applicable",
+    "resourceKind": "tool",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://github.com/NVIDIA/Flora"
+    ],
+    "note": "FLORA 是 TempSeg/Captioner/Rewarder 等标注模型与处理流程；可生成区间、文字与分数，不因此成为一套已发布训练数据。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "ProcVLM / ProcCorpus-60M": {
+    "status": "reviewed",
+    "resourceKind": "derived",
+    "pairs": [
+      [
+        "spatial",
+        "frame"
+      ],
+      [
+        "stage_text",
+        "segment"
+      ],
+      [
+        "progress_failure",
+        "frame"
+      ],
+      [
+        "future_plan",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L"
+    ],
+    "sources": [
+      "https://procvlm.github.io/",
+      "https://huggingface.co/datasets/ce-amtic/ProcCorpus-60M"
+    ],
+    "note": "ProcCorpus 是已发布的二次合成标注，不应只归工具：包含 bbox、当前子任务、进度及剩余步骤推理。帧索引定位当前观察，阶段文字可在多帧重复；剩余计划不同于单一下一步指令。",
+    "pending": "",
+    "alignment": "按 dataset/episode/frame 索引 JSON；阶段语义与帧存储频率分开。",
+    "scope": "发布排除部分源集；原视频分开获取，不自动包含所有机器人 action。",
+    "checkedAt": "2026-10-28",
+    "categoryOverride": "robot"
+  },
+  "DeMiAn": {
+    "status": "reviewed",
+    "resourceKind": "derived",
+    "pairs": [
+      [
+        "observed_caption",
+        "episode"
+      ],
+      [
+        "task_text",
+        "episode"
+      ],
+      [
+        "action_state",
+        "frame"
+      ]
+    ],
+    "modalities": [
+      "V",
+      "L",
+      "A"
+    ],
+    "sources": [
+      "https://github.com/pearls-lab/demian/blob/main/data/README.md",
+      "https://huggingface.co/datasets/PEARLS-Lab/DeMiAn_data"
+    ],
+    "note": "DeMiAn 已另行发布 annotations JSONL 和 RoboCasa365 非图像训练文件；annotations 含多方面文字，RoboCasa 版含逐帧 action parquet 与每 episode reasoning。dense 指描述维度，不能推断为逐秒或逐阶段文本。",
+    "pending": "",
+    "alignment": "",
+    "scope": "图像 packed 文件需从原 RoboCasa 重建；MolmoBot 与 RoboCasa 子集标注不同，不能声称各条都有全部字段。",
+    "checkedAt": "2026-10-28",
+    "categoryOverride": "robot"
+  },
+  "RoboticsCenter dataset list": {
+    "status": "not_applicable",
+    "resourceKind": "index",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://www.roboticscenter.ai/datasets/manipulation"
+    ],
+    "note": "数据发现/聚合目录，链接到其他项目；本身没有可统一赋予的样本标注 schema。目录中提到的标注能力不计为该条自己的训练监督。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "RobotData index": {
+    "status": "not_applicable",
+    "resourceKind": "index",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://robotdata.dev/datasets"
+    ],
+    "note": "数据发现/聚合目录，链接到其他项目；本身没有可统一赋予的样本标注 schema。目录中提到的标注能力不计为该条自己的训练监督。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Claru Physical AI index": {
+    "status": "not_applicable",
+    "resourceKind": "index",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://claru.ai/datasets"
+    ],
+    "note": "数据发现/聚合目录，链接到其他项目；本身没有可统一赋予的样本标注 schema。目录中提到的标注能力不计为该条自己的训练监督。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "OpenBot dataset catalog": {
+    "status": "not_applicable",
+    "resourceKind": "index",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://openbot.ai/datasets"
+    ],
+    "note": "数据发现/聚合目录，链接到其他项目；本身没有可统一赋予的样本标注 schema。目录中提到的标注能力不计为该条自己的训练监督。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "LeRobot datasets / Hub": {
+    "status": "not_applicable",
+    "resourceKind": "index",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://huggingface.co/lerobot"
+    ],
+    "note": "数据发现/聚合目录，链接到其他项目；本身没有可统一赋予的样本标注 schema。目录中提到的标注能力不计为该条自己的训练监督。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  },
+  "Awesome ego data": {
+    "status": "not_applicable",
+    "resourceKind": "index",
+    "pairs": [],
+    "modalities": [],
+    "sources": [
+      "https://github.com/Joeland4/awesome-ego-data"
+    ],
+    "note": "数据发现/聚合目录，链接到其他项目；本身没有可统一赋予的样本标注 schema。目录中提到的标注能力不计为该条自己的训练监督。",
+    "pending": "",
+    "alignment": "",
+    "scope": "",
+    "checkedAt": "2026-10-28"
+  }
+}

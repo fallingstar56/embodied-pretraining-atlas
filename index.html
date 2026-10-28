@@ -11,6 +11,7 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="data/datasets.js"></script>
+  <script defer src="data/annotation_taxonomy.js"></script>
   <script defer src="data/facet_reviews.js"></script>
   <script defer src="assets/facets.js"></script>
   <script defer src="assets/app.js"></script>
@@ -57,7 +58,7 @@
       <section id="collections" class="curated-section" aria-labelledby="collections-title">
         <div class="section-heading"><div><span class="section-kicker">START HERE / 研究路径</span><h2 id="collections-title">按预训练任务寻找数据</h2></div><p>从研究目标出发，而不是只看数据规模。</p></div>
         <div class="collection-grid">
-          <button type="button" class="collection-card collection-a" data-collection="dense"><span class="collection-index">01 / DENSE SUPERVISION</span><span class="collection-art"><svg viewBox="0 0 120 65" fill="none" aria-hidden="true"><path d="M5 51h110M6 29h108M21 9v53M49 9v53M82 9v53M108 9v53" stroke="currentColor" stroke-width="1" opacity=".25"/><path d="M7 48 25 41 42 43 56 17 71 20 89 8 113 15" stroke="currentColor" stroke-width="2.3"/><circle cx="56" cy="17" r="5" fill="#6e62e8" stroke="white" stroke-width="2"/><circle cx="89" cy="8" r="3" fill="currentColor"/></svg></span><span class="collection-title">Dense Annotation <span>↗</span></span><span class="collection-copy">逐帧标注、Subtask、Skill、下一步操作描述</span></button>
+          <button type="button" class="collection-card collection-a" data-collection="dense"><span class="collection-index">01 / DENSE SUPERVISION</span><span class="collection-art"><svg viewBox="0 0 120 65" fill="none" aria-hidden="true"><path d="M5 51h110M6 29h108M21 9v53M49 9v53M82 9v53M108 9v53" stroke="currentColor" stroke-width="1" opacity=".25"/><path d="M7 48 25 41 42 43 56 17 71 20 89 8 113 15" stroke="currentColor" stroke-width="2.3"/><circle cx="56" cy="17" r="5" fill="#6e62e8" stroke="white" stroke-width="2"/><circle cx="89" cy="8" r="3" fill="currentColor"/></svg></span><span class="collection-title">Dense Annotation <span>↗</span></span><span class="collection-copy">阶段语言、帧级语言与剩余步骤推理</span></button>
           <button type="button" class="collection-card collection-b" data-collection="robot"><span class="collection-index">02 / ACTION SCALING</span><span class="collection-art"><svg viewBox="0 0 120 65" fill="none" aria-hidden="true"><circle cx="61" cy="28" r="26" stroke="currentColor" stroke-opacity=".2"/><circle cx="61" cy="28" r="17" stroke="currentColor" stroke-opacity=".3"/><path d="M19 51h26l17-23 19 11 20-19" stroke="currentColor" stroke-width="2.5"/><circle cx="19" cy="51" r="4" fill="currentColor"/><circle cx="101" cy="20" r="4" fill="currentColor"/></svg></span><span class="collection-title">Robot Trajectories <span>↗</span></span><span class="collection-copy">真实 / 仿真机器人数据，多本体动作建模</span></button>
           <button type="button" class="collection-card collection-c" data-collection="vl"><span class="collection-index">03 / VL PRETRAINING</span><span class="collection-art"><svg viewBox="0 0 120 65" fill="none" aria-hidden="true"><rect x="9" y="13" width="41" height="39" rx="5" stroke="currentColor" stroke-width="2"/><rect x="35" y="4" width="41" height="39" rx="5" stroke="currentColor" stroke-width="2"/><rect x="61" y="21" width="49" height="36" rx="5" stroke="currentColor" stroke-width="2"/><path d="m77 30 13 9-13 9V30Z" fill="currentColor"/></svg></span><span class="collection-title">Video × Language <span>↗</span></span><span class="collection-copy">密集视频描述、时间分段、图文与空间 Grounding</span></button>
         </div>
@@ -74,7 +75,7 @@
             <div class="filter-group"><div class="filter-heading">标注时间尺度</div><div id="temporal-options" class="check-options"></div></div>
             <div class="filter-group"><div class="filter-heading">标注内容</div><div id="annotation-options" class="check-options"></div></div>
             <div class="filter-group"><div class="filter-heading">证据状态</div><div id="evidence-options" class="check-options"></div></div>
-            <p class="facet-explainer">不同维度取交集，同组多选取并集。时间与内容必须对应<strong>同一项标注</strong>；“已核验”仅指公开资料支持该标注，不代表下载核验。</p>
+            <p class="facet-explainer">不同维度取交集，同组多选取并集。时间与内容必须对应<strong>同一项标注</strong>；“公开资料支持”不代表下载全量核验。阶段标签广播到帧仍按阶段归类；工具与目录不参与标注筛选。</p>
             <div class="filter-group"><div class="filter-heading">数据可获取性</div><div id="access-options" class="check-options"></div></div>
             <div class="filter-group filter-toggle"><label for="only-favorites">仅查看收藏</label><input type="checkbox" id="only-favorites" /></div>
             <div class="side-note"><span class="note-icon">i</span><p>规模来自公开项目描述，不等于当前可下载的独立训练样本量。许可证与数据重叠请在使用前复核。</p></div>
@@ -86,12 +87,13 @@
             <div id="dataset-grid" class="dataset-grid" aria-live="polite"></div>
             <div id="empty-state" class="empty-state" hidden><span class="empty-icon">⌕</span><h3>暂时没有匹配的资源</h3><p>试试简化关键词，或移除部分筛选条件。</p><button id="empty-reset" class="btn btn-primary" type="button">清除筛选</button></div>
             <div id="load-more-wrap" class="load-more-wrap"><button type="button" id="load-more" class="btn btn-load">加载更多数据 <span id="load-progress"></span><span aria-hidden="true"> ↓</span></button></div>
-            <div class="catalog-bottom"><span>基于原始数据源整理 · 最后更新 2026.10.27</span><button type="button" id="export-csv">↓ 导出当前筛选 CSV</button></div>
+            <div class="catalog-bottom"><span>基于原始数据源整理 · 标注核查 2026.10.28</span><button type="button" id="export-csv">↓ 导出当前筛选 CSV</button></div>
           </div>
         </div>
       </section>
 
       <section id="methodology" class="method-section" aria-labelledby="method-heading"><div class="method-title"><span class="section-kicker">HOW TO USE / 数据组织</span><h2 id="method-heading">让数据成为可复用的<br/><em>预训练基础设施。</em></h2><p>原始数据、语言标注和训练样本应当分层管理。尤其注意二次标注数据和原始数据之间的重复关系。</p><a href="https://github.com/new" target="_blank" rel="noopener noreferrer" class="inline-link">部署自己的 GitHub Pages <span>↗</span></a></div><div class="method-steps"><div class="method-item"><span>01</span><div><strong>DISCOVER · 发现与筛选</strong><p>按 V/L/A、数据规模、时间粒度与开放状态筛选。优先查看 S 级的 Dense 标注语料。</p></div></div><div class="method-item"><span>02</span><div><strong>VERIFY · 校验与去重</strong><p>核对原始下载文件、许可、Episode ID、语言质量，以及它是否只是已有轨迹的衍生标注。</p></div></div><div class="method-item"><span>03</span><div><strong>UNIFY · 转换为统一格式</strong><p>构建 Task → Stage → 1s Annotation → Robot Action 的时间对齐记录，保存可追溯的来源信息。</p></div></div></div></section>
+      <p class="audit-downloads"><a href="ANNOTATION_AUDIT.md">117 条逐项核查报告</a> · <a href="data/annotation_audit.csv" download>下载完整标注核查 CSV</a></p>
       <section class="disclaimer"><span class="disclaimer-mark">!</span><div><strong>关于收录口径</strong><p>这是研究候选资源目录，包含数据集、工具与聚合入口；公开规模可能有重叠。标注粒度和许可证以原始项目当前文档为准。“优先级”是针对层次化具身预训练任务的初步建议，不代表数据质量的统一排名。</p></div></section>
     </div>
   </main>
